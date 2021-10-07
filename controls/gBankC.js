@@ -2,25 +2,10 @@
 const express = require('express');
 const gRouter = express.Router();
 const gBank = require('../models/gBank.js');
-const methodOverride = require("method-override")
-
-
-
-// Middleware
-// Body parser middleware: give us access to req.body
-gRouter.use(express.urlencoded({ extended: true }));
-gRouter.use(methodOverride("_method"))
 
 
 
 
-
-//ROUTES
-// // INDEX
-// gRouter.get('/', (req, res)=>{
-//     res.render("index.ejs", {allG: gBank});
-    
-// });
 
 
 
@@ -45,13 +30,16 @@ gRouter.get('/new', (req, res) => {
 
 
 
-  // Delete
-gRouter.delete("/:id", (req, res) => {
+// Delete
+gRouter.delete("/books/:id", (req, res) => {
 	gBank.findByIdAndRemove(req.params.id, (err, data) => {
 	  res.redirect("/")
 	})
   })
 
+
+
+	// update
   gRouter.put("/:id", (req, res) => {  
 	gBank.findByIdAndUpdate(
 	  req.params.id,
@@ -100,14 +88,6 @@ gRouter.get('/:id', (req, res) => {
 		});
 	});
 });
-
-
-
-
-
-
-
-
 
 
 
