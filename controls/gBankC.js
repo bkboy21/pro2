@@ -31,7 +31,7 @@ gRouter.get('/new', (req, res) => {
 
 
 // Delete
-gRouter.delete("/books/:id", (req, res) => {
+gRouter.delete("/:id", (req, res) => {
 	gBank.findByIdAndRemove(req.params.id, (err, data) => {
 	  res.redirect("/")
 	})
