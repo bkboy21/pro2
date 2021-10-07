@@ -28,7 +28,6 @@ gRouter.use(methodOverride("_method"))
 // Index
 gRouter.get('/', (req, res) => {
 	gBank.find({}, (error, allGs) => {
-		console.log(allGs)
 		res.render('index.ejs', {
 			gData: allGs,});
 	});
@@ -40,16 +39,35 @@ gRouter.get('/', (req, res) => {
 // Routes / Controllers
 // New
 gRouter.get('/new', (req, res) => {
-	res.send('new.ejs');
+	res.render('new.ejs');
 });
 
 
 
 
-// DELETE
+  // Delete
 gRouter.delete("/:id", (req, res) => {
-	res.send("deleting...")
+	gBank.findByIdAndRemove(req.params.id, (err, data) => {
+	  res.redirect("/")
+	})
   })
+
+  gRouter.put("/:id", (req, res) => {  
+	gBank.findByIdAndUpdate(
+	  req.params.id,
+	  req.body,
+	  {
+		new: true,
+	  },
+	  (error, updatedBook) => {
+		res.redirect(`/${req.params.id}`)
+	  }
+	)
+  })
+
+
+
+
 
 
 
@@ -63,15 +81,25 @@ gRouter.post('/', (req, res) => {
 
 
 
+// Edit
+gRouter.get("/:id/edit", (req, res) => {
+	gBank.findById(req.params.id, (error, foundBook) => {
+	  res.render("edit.ejs", {
+		gData: foundBook,
+	  })
+	})
+  })
+
 
 
 // Show
 gRouter.get('/:id', (req, res) => {
 	gBank.findById(req.params.id, (err, foundBook) => {
-		res.send(foundBook);
+		res.render('show.ejs', {
+			book: foundBook,
+		});
 	});
 });
-
 
 
 
