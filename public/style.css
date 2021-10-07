@@ -1,0 +1,24 @@
+.container{
+
+    display: flex;
+    justify-content: center;
+
+    
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
+
+.dBtn{
+    
+    background-color: coral;
+    position:static;
+
+}
+
+nav{
+    padding-top: 80px;
+    padding-left: 200px;
+}

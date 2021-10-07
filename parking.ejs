@@ -1,0 +1,26 @@
+
+
+
+
+
+<ul>
+    <% gData.forEach(gText => { %>
+    <li><%=gText.title; %></li>
+    <% }) %>
+</ul>
+
+
+
+
+
+
+
+
+// Show
+gRouter.get('/show', (req, res) => {
+	gBank.find({}, (error, allGs) => {
+		res.render('show.ejs', {
+			gData: allGs,
+		});
+	});
+});
